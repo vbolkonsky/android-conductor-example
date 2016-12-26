@@ -82,7 +82,6 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     protected void onAttach(@NonNull View view) {
         super.onAttach(view);
         log.info("onAttach() called");
-        getPresenter().attachView(this);
         Observable.interval(1, TimeUnit.SECONDS)
                 .doOnDispose(() -> log.info("Disposing from onAttach()"))
                 .compose(this.bindUntilEvent(ControllerEvent.DETACH))
@@ -103,7 +102,6 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     protected void onDetach(@NonNull View view) {
         super.onDetach(view);
         log.info("onDetach() called");
-        getPresenter().detachView(true);
     }
 
     @Override
