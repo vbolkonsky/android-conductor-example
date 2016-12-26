@@ -10,6 +10,7 @@ import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.magorasystems.conductor.example.R;
 import com.magorasystems.conductor.example.ui.controller.AuthorizationController;
+import com.magorasystems.conductor.example.ui.controller.TextController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +28,11 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.controller_container)
     ViewGroup container;
+    @BindView(R.id.controller_container_bottom)
+    ViewGroup containerBottom;
 
     private Router router;
+    private Router routerBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,14 @@ public class MainActivity extends AppCompatActivity {
         router = Conductor.attachRouter(this, container, savedInstanceState);
         if (!router.hasRootController()) {
             final Bundle args = new Bundle();
-            args.putInt(AuthorizationController.KEY_RESOURCE_ID, R.layout.controller_authorization);
+            args.putInt(getString(R.string.key_layout), R.layout.controller_authorization);
             router.setRoot(RouterTransaction.with(new AuthorizationController(args)));
+        }
+        routerBottom = Conductor.attachRouter(this, containerBottom, savedInstanceState);
+        if(!routerBottom.hasRootController()){
+            final Bundle args = new Bundle();
+            args.putString(getString(R.string.key_text_value), "bottom router");
+            routerBottom.setRoot(RouterTransaction.with(new TextController(args)));
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bluelinelabs.conductor.rxlifecycle2.ControllerEvent;
+import com.magorasystems.conductor.example.R;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationPresenter;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationPresenterImpl;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationView;
@@ -27,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AuthorizationController extends RxMvpViewStateController<AuthorizationView, AuthorizationPresenter, AuthorizationViewState> implements AuthorizationView {
 
-    public static final String KEY_RESOURCE_ID = "keyResourceId";
 
     private Unbinder unbinder;
 
@@ -67,7 +67,7 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     @NonNull
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        final View view = inflater.inflate(getArgs().getInt(KEY_RESOURCE_ID), container, false);
+        final View view = inflater.inflate(getArgs().getInt(container.getResources().getString(R.string.key_layout)), container, false);
         unbinder = ButterKnife.bind(this, view);
         Observable.interval(1, TimeUnit.SECONDS)
                 .doOnDispose(() -> log.info("Disposing from onCreateView)"))
