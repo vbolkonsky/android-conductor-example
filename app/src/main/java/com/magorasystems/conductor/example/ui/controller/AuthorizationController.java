@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.bluelinelabs.conductor.rxlifecycle2.ControllerEvent;
 import com.magorasystems.conductor.example.R;
+import com.magorasystems.conductor.example.application.ConductorExampleApplication;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationPresenter;
-import com.magorasystems.conductor.example.mvp.authorization.AuthorizationPresenterImpl;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationView;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationViewState;
 
@@ -45,7 +45,8 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     @NonNull
     @Override
     public AuthorizationPresenter createPresenter() {
-        return new AuthorizationPresenterImpl();
+        return ConductorExampleApplication.get(getActivity())
+                .getComponent().authorizationPresenter();
     }
 
     @NonNull
