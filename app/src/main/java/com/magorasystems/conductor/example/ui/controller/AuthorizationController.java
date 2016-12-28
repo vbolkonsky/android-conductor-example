@@ -34,8 +34,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author Valentin S.Bolkonsky
  */
 @Slf4j
-public class AuthorizationController extends RxMvpViewStateController<AuthorizationView, AuthorizationPresenter, AuthorizationViewState> implements AuthorizationView {
+public class AuthorizationController extends RxMvpViewStateController<AuthorizationView, AuthorizationPresenter, AuthorizationViewState>
+        implements AuthorizationView {
 
+    //region views
 
     @BindView(R.id.text_email)
     TextView textEmail;
@@ -43,6 +45,7 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     TextView textPassword;
     private Unbinder unbinder;
 
+    //endregion
 
     public AuthorizationController(final Bundle args) {
         super(args);
@@ -69,6 +72,8 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
                 .getComponent().authorizationPresenter();
     }
 
+    //region viewState
+
     @NonNull
     @Override
     public AuthorizationViewState createViewState() {
@@ -84,6 +89,8 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     public void onNewViewStateInstance() {
 
     }
+
+    //endregion
 
     @NonNull
     @Override
