@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
+import com.bluelinelabs.conductor.changehandler.SimpleSwapChangeHandler;
+import com.bluelinelabs.conductor.changehandler.VerticalChangeHandler;
 import com.bluelinelabs.conductor.rxlifecycle2.ControllerEvent;
 import com.magorasystems.conductor.example.R;
 import com.magorasystems.conductor.example.application.ConductorExampleApplication;
@@ -136,5 +138,12 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
         if (email != null && password != null) {
             presenter.login(String.valueOf(email), String.valueOf(password));
         }
+    }
+
+    @OnClick(R.id.text_password_recover)
+    void onGoToRestorePassword() {
+        getRouter().pushController(RouterTransaction.with(new RestorePasswordController())
+                .popChangeHandler(new VerticalChangeHandler())
+                .pushChangeHandler(new SimpleSwapChangeHandler()));
     }
 }
