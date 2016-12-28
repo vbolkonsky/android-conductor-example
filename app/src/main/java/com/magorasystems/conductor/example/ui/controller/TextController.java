@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.rxlifecycle2.RxController;
 import com.magorasystems.conductor.example.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,5 +59,10 @@ public class TextController extends RxController {
         log.info("onDestroyView() called");
         unbinder.unbind();
         unbinder = null;
+    }
+
+    @OnClick(R.id.text_view)
+    void onTextViewClick() {
+        getRouter().pushController(RouterTransaction.with(new SaveCatalogController()));
     }
 }

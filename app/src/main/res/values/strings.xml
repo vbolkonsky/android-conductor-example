@@ -7,4 +7,6 @@
     <string name="title_sign_in">Вход</string>
     <string name="password_recover"><u>Забыли пароль?</u></string>
     <string name="action_restore_password">Отправить</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_back">Назад</string>
 </resources>

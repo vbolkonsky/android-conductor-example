@@ -3,6 +3,7 @@ package com.magorasystems.conductor.example.dagger;
 import com.magorasystems.conductor.example.dagger.module.ApplicationModule;
 import com.magorasystems.conductor.example.dagger.module.PresenterModule;
 import com.magorasystems.conductor.example.mvp.authorization.AuthorizationPresenter;
+import com.magorasystems.conductor.example.mvp.savecatalog.SaveCatalogPresenter;
 
 import javax.inject.Singleton;
 
@@ -16,6 +17,8 @@ import dagger.Component;
 public interface MainComponent {
 
     AuthorizationPresenter authorizationPresenter();
+
+    SaveCatalogPresenter saveCatalogPresenter();
 
     //void inject(AuthorizationController controller);
 }
