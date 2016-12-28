@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
+import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
 import com.bluelinelabs.conductor.rxlifecycle2.ControllerEvent;
 import com.magorasystems.conductor.example.R;
 import com.magorasystems.conductor.example.application.ConductorExampleApplication;
@@ -52,6 +55,9 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     @Override
     public void authorizationSuccess() {
         log.debug("authorizationSuccess");
+        getRouter().pushController(RouterTransaction.with(new PagerController())
+                .pushChangeHandler(new FadeChangeHandler())
+                .popChangeHandler(new HorizontalChangeHandler()));
     }
 
     @NonNull
