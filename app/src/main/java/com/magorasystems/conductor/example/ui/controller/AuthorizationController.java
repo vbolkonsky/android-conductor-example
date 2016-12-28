@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bluelinelabs.conductor.rxlifecycle2.ControllerEvent;
 import com.magorasystems.conductor.example.R;
@@ -15,7 +16,9 @@ import com.magorasystems.conductor.example.mvp.authorization.AuthorizationViewSt
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,10 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthorizationController extends RxMvpViewStateController<AuthorizationView, AuthorizationPresenter, AuthorizationViewState> implements AuthorizationView {
 
 
+    @BindView(R.id.text_email)
+    TextView textEmail;
+    @BindView(R.id.text_password)
+    TextView textPassword;
     private Unbinder unbinder;
 
 
@@ -40,6 +47,11 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
                 .subscribe(num -> {
                     log.info("Started in constructor, running until onDestroy(): {}", num);
                 });
+    }
+
+    @Override
+    public void authorizationSuccess() {
+        log.debug("authorizationSuccess");
     }
 
     @NonNull
@@ -109,5 +121,14 @@ public class AuthorizationController extends RxMvpViewStateController<Authorizat
     public void onDestroy() {
         super.onDestroy();
         log.info("onDestroy() called");
+    }
+
+    @OnClick(R.id.button_sign_in)
+    void onAuthorization() {
+        final CharSequence email = textEmail.getText();
+        final CharSequence password = textPassword.getText();
+        if (email != null && password != null) {
+            presenter.login(String.valueOf(email), String.valueOf(password));
+        }
     }
 }

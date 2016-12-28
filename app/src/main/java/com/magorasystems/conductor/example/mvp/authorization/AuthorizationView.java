@@ -9,4 +9,6 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  */
 
 public interface AuthorizationView extends MvpView {
+
+    void authorizationSuccess();
 }

@@ -9,4 +9,6 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
  */
 
 public interface AuthorizationPresenter extends MvpPresenter<AuthorizationView>{
+
+    void login(String login, String password);
 }
